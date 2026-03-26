@@ -1,5 +1,5 @@
 import db from "../database/databases";
-import { Compras } from "../models/Compra";
+import { Compras } from "../models/Compras";
 
 export const CompraRepository = {
   criar(venda: { cliente_id: number; total: number }): number {

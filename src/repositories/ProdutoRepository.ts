@@ -1,5 +1,5 @@
 import db from "../database/databases";
-import { Produto } from "../models/Produto";
+import { Produto } from "../models/Produtos";
 
 export const ProdutoRepository = {
   criar(produto: Produto): void {

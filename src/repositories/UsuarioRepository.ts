@@ -1,27 +1,27 @@
 import db from "../database/databases";
-import { Usuario } from "../models/Usuario";
+import { Usuarios } from "../models/Usuarios";
 
 export const UsuarioRepository = {
-  criar(cliente: Usuario): void {
+  criar(cliente: Usuarios): void {
     db.prepare("INSERT INTO clientes (nome, email) VALUES (?, ?)").run(
       cliente.nome,
       cliente.email,
     );
   },
 
-  buscarPorEmail(email: string): Usuario | undefined {
+  buscarPorEmail(email: string): Usuarios | undefined {
     return db.prepare("SELECT * FROM clientes WHERE email = ?").get(email) as
-      | Usuario
+      | Usuarios
       | undefined;
   },
 
-  buscarPorId(id: number): Usuario | undefined {
+  buscarPorId(id: number): Usuarios | undefined {
     return db.prepare("SELECT * FROM clientes WHERE id = ?").get(id) as
-      | Usuario
+      | Usuarios
       | undefined;
   },
 
-  listarTodos(): Usuario[] {
-    return db.prepare("SELECT * FROM clientes").all() as Usuario[];
+  listarTodos(): Usuarios[] {
+    return db.prepare("SELECT * FROM clientes").all() as Usuarios[];
   },
 };
