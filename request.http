@@ -1,0 +1,171 @@
+# ─── CLIENTES ────────────────────────────────────────────────────────────────
+
+### Criar cliente
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+  "nome": "Maria",
+  "email": "maria@email.com",
+  "senha": "123456"
+}
+
+###
+
+### Criar cliente com email duplicado (deve retornar 409)
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+  "nome": "Maria Duplicada",
+  "email": "maria@email.com",
+  "senha": "123456"
+}
+
+###
+
+### Listar todos os clientes
+GET http://localhost:3000/clientes
+
+###
+
+# ─── PRODUTOS ────────────────────────────────────────────────────────────────
+
+### Criar produto
+POST http://localhost:3000/produtos
+Content-Type: application/json
+
+{
+  "nome": "Tênis Azul",
+  "valor_venda": 400,
+  "estoque": 10
+}
+
+###
+
+### Listar todos os produtos
+GET http://localhost:3000/produtos
+
+###
+
+### Buscar produto por id
+GET http://localhost:3000/produtos/1
+
+###
+
+### Buscar produto inexistente (deve retornar 404)
+GET http://localhost:3000/produtos/9999
+
+###
+
+### Atualizar produto
+PUT http://localhost:3000/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "Tênis Azul Premium",
+  "valor_venda": 450,
+  "estoque": 8
+}
+
+###
+
+# ─── ESTOQUE ─────────────────────────────────────────────────────────────────
+
+### Buscar estoque de um produto
+GET http://localhost:3000/estoque/1
+
+###
+
+### Atualizar estoque de um produto
+PUT http://localhost:3000/estoque/1
+Content-Type: application/json
+
+{
+  "quantidade": 20
+}
+
+###
+
+# ─── VENDAS ──────────────────────────────────────────────────────────────────
+
+### Criar venda com um produto
+POST http://localhost:3000/vendas
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "itens": [
+    { "produto_id": 1, "quantidade": 1 }
+  ]
+}
+
+###
+
+### Criar venda com múltiplos produtos
+POST http://localhost:3000/vendas
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "itens": [
+    { "produto_id": 1, "quantidade": 2 },
+    { "produto_id": 2, "quantidade": 1 }
+  ]
+}
+
+###
+
+### Criar venda com cliente inexistente (deve retornar 404)
+POST http://localhost:3000/vendas
+Content-Type: application/json
+
+{
+  "cliente_id": 9999,
+  "itens": [
+    { "produto_id": 1, "quantidade": 1 }
+  ]
+}
+
+###
+
+### Criar venda com produto inexistente (deve retornar 404)
+POST http://localhost:3000/vendas
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "itens": [
+    { "produto_id": 9999, "quantidade": 1 }
+  ]
+}
+
+###
+
+### Criar venda com estoque insuficiente (deve retornar 400)
+POST http://localhost:3000/vendas
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "itens": [
+    { "produto_id": 1, "quantidade": 9999 }
+  ]
+}
+
+###
+
+### Listar todas as vendas
+GET http://localhost:3000/vendas
+
+###
+
+### Buscar venda por id (com itens)
+GET http://localhost:3000/vendas/1
+
+###
+
+### Buscar venda inexistente (deve retornar 404)
+GET http://localhost:3000/vendas/9999
+
+###
